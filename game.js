@@ -112,18 +112,34 @@ $(function() {
     Ticker.addListener(stage);
     Ticker.setFPS(24);
 
-    $(document).keydown(function(event) {
-      if (event.which === 65) {
-        character.move('left');
-      } else if (event.which === 87) {
-        character.move('up');
-      } else if (event.which === 68) {
-        character.move('right');
-      } else if (event.which === 83) {
-        character.move('down');
+    var DocumentView = Backbone.View.extend({
+      el: document,
+
+      initialize: function() {
+        _.bindAll(this);
+        this.character = this.options.character;
+
+        this.$el.on('keydown', this.onKeyDown);
+        this.$el.on('keyup', this.onKeyUp);
+      },
+
+      onKeyDown: function(event) {
+        if (event.which === 65) {
+          this.character.move('left');
+        } else if (event.which === 87) {
+          this.character.move('up');
+        } else if (event.which === 68) {
+          this.character.move('right');
+        } else if (event.which === 83) {
+          this.character.move('down');
+        }
+      },
+
+      onKeyUp: function(event) {
+        this.character.idle();
       }
-    }).keyup(function(event) {
-      character.idle();
     });
+
+    var documentView = new DocumentView({ character: character });
   };
 });
