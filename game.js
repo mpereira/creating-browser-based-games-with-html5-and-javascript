@@ -12,51 +12,24 @@ $(function() {
     spriteSheet = new SpriteSheet({
       images: [image],
 
-      frames: {
-        width: 96,
-        height: 96
-      },
+      frames: { width: 96, height: 96 },
 
       animations: {
-        walkLeft: {
-          frames: [5, 6, 7, 8],
-          frequency: spriteSheetFrequency
-        },
+        walkLeft: { frames: [5, 6, 7, 8], frequency: spriteSheetFrequency },
 
-        walkRight: {
-          frames: [20, 21, 22, 23],
-          frequency: spriteSheetFrequency
-        },
+        walkRight: { frames: [20, 21, 22, 23], frequency: spriteSheetFrequency },
 
-        walkUp: {
-          frames: [35, 36, 37, 38],
-          frequency: spriteSheetFrequency
-        },
+        walkUp: { frames: [35, 36, 37, 38], frequency: spriteSheetFrequency },
 
-        walkDown: {
-          frames: [50, 51, 52, 53],
-          frequency: spriteSheetFrequency
-        },
+        walkDown: { frames: [50, 51, 52, 53], frequency: spriteSheetFrequency },
 
-        idleLeft: {
-          frames: [10, 11],
-          frequency: spriteSheetFrequency
-        },
+        idleLeft: { frames: [10, 11], frequency: spriteSheetFrequency },
 
-        idleRight: {
-          frames: [25, 26],
-          frequency: spriteSheetFrequency
-        },
+        idleRight: { frames: [25, 26], frequency: spriteSheetFrequency },
 
-        idleUp: {
-          frames: [40, 41],
-          frequency: spriteSheetFrequency
-        },
+        idleUp: { frames: [40, 41], frequency: spriteSheetFrequency },
 
-        idleDown: {
-          frames: [55, 56],
-          frequency: spriteSheetFrequency
-        }
+        idleDown: { frames: [55, 56], frequency: spriteSheetFrequency }
       }
     });
 
