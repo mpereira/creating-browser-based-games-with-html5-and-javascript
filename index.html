@@ -1,0 +1,539 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Creating browser-based games with HTML5 and JavaScript</title>
+    <meta charset='utf-8'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic'
+          rel='stylesheet'
+          type='application/font-woff'>
+    <link rel='stylesheet' href='reset.css'>
+    <link rel='stylesheet' href='reveal.css'>
+    <link rel='stylesheet' href='highlight.theme.zenburn.css'>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+    <script src='jquery.js'></script>
+    <script src='underscore.js'></script>
+    <script src='backbone.js'></script>
+    <div id='reveal'>
+      <div class='slides'>
+        <section class='vertical-align-middle'>
+          <h2>Creating browser-based games with HTML5 and JavaScript</h2>
+          <p>
+            Murilo Pereira
+            (<a href='http://twitter.com/mpereira'>@mpereira</a>),
+            April 10th 2012
+          </p>
+        </section>
+
+        <section>
+          <section class='vertical-align-middle'>
+            <div class='middle'>
+            <h1>
+              Creating things
+            </h1>
+            </div>
+          </section>
+
+          <section class='vertical-align-middle'>
+            <h2>
+              <a href='http://carl.flax.ie/dothingstellpeople.html'>
+                Do Things, tell people
+              </a>
+            </h2>
+            <h3>(ideally in that order)</h3>
+          </section>
+
+          <section class='talk-work'>
+          </section>
+        </section>
+
+
+        <section>
+          <section>
+            <h1>Let's talk about JavaScript</h1>
+          </section>
+
+          <section>
+            <blockquote class='twitter-tweet tw-align-center'><p>I believe in elegant, well-tested code unless I'm working with Javascript, in which case I hack like a crazed baboon til it kinda works.</p>&mdash; Cody Powell (@codypo) <a href='https://twitter.com/codypo/status/79660388785991680' data-datetime='2011-06-11T21:24:51+00:00'>June 11, 2011</a></blockquote>
+            <h1 class='fragment'>Please don't</h1>
+          </section>
+
+          <section>
+            <p>
+              JavaScript has a history of being treated as a second-class citizen
+              on web applications.
+            </p>
+            <img src='second_class_citizen_t_shirt.jpg'
+                 alt='Second class citizen t-shirt'>
+            <p>
+              Mostly used for "web 2.0" (ughh) visual effects and occasional AJAX
+              requests.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Rarely used by people who actually know the language. Seen as a
+              toy.
+            </p>
+            <img src='will_code_html_for_food_guy.jpg'
+                 alt='Will code HTML for food guy'>
+          </section>
+
+          <section>
+            <p>
+              Snippets spread through the codebase make it unmaintanable,
+              error-prone mess.
+            </p>
+            <img src='crying_baby_covered_in_spaguetti.jpg'
+                 alt='Crying baby covered in spaguetti'>
+            <p>
+              Inlined code make logic non-reusable, hard to debug and
+              troubleshoot.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Reasonable solution: separate behaviour from content
+              (unobtrusive), in the same way that CSS separates presentation
+              from content.
+            </p>
+            <img src='backbone_js_logo.png'
+                 alt='Backbone.js logo'
+                 class='fragment'>
+            <h1 class='fragment'>To the rescue!1</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Backbone.js</h1>
+            <h2>is:</h2>
+            <ul>
+              <li>MVC JavaScript <i>framework</i></li>
+              <li>Hash-routing engine</li>
+              <li>RESTful JSON interface</li>
+            </ul>
+            <h3 class='fragment'>We'll focus on the MVC bit.</h3>
+          </section>
+
+          <section>
+            <h1>MVC</h1>
+            <img src='mvc_or_is_it.jpg'
+                 alt='MVC or is it?'
+                 class='fragment'>
+          </section>
+
+          <section>
+            <h2>MVC <small>(roughly)</small></h2>
+            <img src='mvc.jpg'
+                 alt='MVC'
+                 class='fragment'>
+            <ul class='fragment'>
+              <li>Model: data + business logic</li>
+              <li>View: user interface</li>
+              <li>Controller: input handler (and everything else)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>I wanna see code!1</h1>
+          </section>
+
+          <section>
+            <pre><code>
+              &lt;div id='character'&gt;&lt;/div&gt;
+            </code></pre>
+
+            <pre><code>
+              var character = new Backbone.Model({
+                name: 'Frodo'
+              });
+
+              var characterView = new Backbone.View({
+                el: '#character',
+
+                model: character,
+
+                render: function() {
+                  this.$el.append('Hi, I\'m ' + this.model.get('name'));
+                }
+              });
+
+              characterView.render();
+            </code></pre>
+
+            <img src='down_arrow.png' alt='Down arrow' class='unstyled-image'>
+
+            <pre><code>
+              &lt;div id='character'&gt;Hi, I'm Frodo&lt;/div&gt;
+            </code></pre>
+          </section>
+
+          <section>
+            <h1>K, what about canvas?</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>
+              &lt;canvas&gt;
+            </h1>
+            <h2>is:</h2>
+            <ul>
+              <li>Bitmap drawed by JavaScript</li>
+              <li>2D shapes and images</li>
+            </ul>
+          </section>
+
+          <section>
+            <div>
+              <div style='float: left;'>
+                <img src='blank_canvas.jpg' alt='Blank canvas'>
+                <h2>
+                  &lt;canvas&gt;
+                </h2>
+              </div>
+
+              <div style='float: right;'>
+                <img src='painting_brushes.jpg' alt='Painting brushes'>
+                <h2>
+                  JavaScript
+                </h2>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <img src='kids_with_paint.jpg' alt='Kids with paint'>
+            <h3>Enables you to do cool stuff</h3>
+          </section>
+
+          <section>
+            <h3>A diagonal line</h3>
+            <pre><code>
+              &lt;canvas id='first-canvas' width='800px' height='200px'&gt;&lt;/canvas&gt;
+            </code></pre>
+            <pre><code>
+              var context = document.getElementById('first-canvas').getContext('2d');
+
+              context.moveTo(150, 50);
+              context.lineTo(600, 150);
+              context.lineWidth = 15;
+              context.stroke();
+            </code></pre>
+
+            <img src='down_arrow.png' alt='Down arrow' class='unstyled-image'>
+
+            <div>
+              <canvas id='first-canvas' width='800px' height='200px'></canvas>
+              <script defer=''>
+                var context = document.getElementById('first-canvas').getContext('2d');
+
+                context.moveTo(150, 50);
+                context.lineTo(600, 150);
+                context.lineWidth = 15;
+                context.stroke();
+              </script>
+            </div>
+          </section>
+
+          <section>
+            <h3>A rectangle with borders</h3>
+            <pre><code>
+              &lt;canvas id='second-canvas' width='800px' height='200px'&gt;&lt;/canvas&gt;
+            </code></pre>
+            <pre><code>
+              var context = document.getElementById('second-canvas').getContext('2d');
+
+              context.beginPath();
+              context.rect(225, 25, 300, 150);
+              context.fillStyle = 'yellow';
+              context.fill();
+              context.lineWidth = 5;
+              context.strokeStyle = 'black';
+              context.stroke();
+            </code></pre>
+
+            <img src='down_arrow.png' alt='Down arrow' class='unstyled-image'>
+
+            <div>
+              <canvas id='second-canvas' width='800px' height='200px'></canvas>
+              <script defer=''>
+                var context = document.getElementById('second-canvas').getContext('2d');
+                context.beginPath();
+                context.rect(225, 25, 300, 150);
+                context.fillStyle = 'yellow';
+                context.fill();
+                context.lineWidth = 5;
+                context.strokeStyle = 'black';
+                context.stroke();
+              </script>
+            </div>
+          </section>
+
+          <section>
+            <h3>A semicircle with gradient</h3>
+            <pre><code>
+              &lt;canvas id='third-canvas' width='800px' height='150px'&gt;&lt;/canvas&gt;
+            </code></pre>
+
+            <pre><code>
+              var context = document.getElementById('third-canvas').getContext('2d');
+
+              context.beginPath();
+              context.arc(400, 60, 100, 0, Math.PI, false);
+              context.closePath();
+              context.lineWidth = 15;
+              var gradient = context.createLinearGradient(300, 50, 500, 50);
+              gradient.addColorStop(0, 'yellow');
+              gradient.addColorStop(1, 'green');
+              context.fillStyle = gradient;
+              context.fill();
+              context.strokeStyle = 'black';
+              context.stroke();
+            </code></pre>
+
+            <img src='down_arrow.png' alt='Down arrow' class='unstyled-image'>
+
+            <div>
+              <canvas id='third-canvas' width='800px' height='150px'></canvas>
+              <script defer=''>
+                var context = document.getElementById('third-canvas').getContext('2d');
+
+                context.beginPath();
+                context.arc(400, 30, 100, 0, Math.PI, false);
+                context.closePath();
+                context.lineWidth = 15;
+                var gradient = context.createLinearGradient(300, 50, 500, 50);
+                gradient.addColorStop(0, 'yellow');
+                gradient.addColorStop(1, 'green');
+                context.fillStyle = gradient;
+                context.fill();
+                context.strokeStyle = 'black';
+                context.stroke();
+              </script>
+            </div>
+          </section>
+
+          <section>
+            <h1>Let's build a simple "game"</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <canvas id='game-canvas' width='800px' height='600px'></canvas>
+            <script defer=''>
+              $(function() {
+                var canvas = document.getElementById('game-canvas');
+                var context = canvas.getContext('2d');
+
+                var spriteSheet;
+                var bitmapAnimationFrequency = 4;
+
+                var image = new Image();
+                image.src = 'character.png';
+
+                image.onload = function() {
+                  spriteSheet = new SpriteSheet({
+                    images: [image],
+
+                    frames: {
+                      width: 96,
+                      height: 96,
+                      count: 60
+                    },
+
+                    animations: {
+                      walkLeft: {
+                        frames: [5, 6, 7, 8],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      walkRight: {
+                        frames: [20, 21, 22, 23],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      walkUp: {
+                        frames: [35, 36, 37, 38],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      walkDown: {
+                        frames: [50, 51, 52, 53],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      idleLeft: {
+                        frames: [10, 11],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      idleRight: {
+                        frames: [25, 26],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      idleUp: {
+                        frames: [40, 41],
+                        frequency: bitmapAnimationFrequency
+                      },
+
+                      idleDown: {
+                        frames: [55, 56],
+                        frequency: bitmapAnimationFrequency
+                      }
+                    }
+                  });
+
+                  var bitmapAnimation = new BitmapAnimation(spriteSheet);
+
+                  var Character = Backbone.Model.extend({
+                    movementSpeed: 5,
+
+                    move: function(direction) {
+                      if (direction === 'left') {
+                        this.set('x', this.get('x') - this.movementSpeed);
+                      } else if (direction === 'up') {
+                        this.set('y', this.get('y') - this.movementSpeed);
+                      } else if (direction === 'right') {
+                        this.set('x', this.get('x') + this.movementSpeed);
+                      } else if (direction === 'down') {
+                        this.set('y', this.get('y') + this.movementSpeed);
+                      }
+                    },
+
+                    idle: function() {
+                      this.trigger('idle', this);
+                    }
+                  });
+
+                  var CharacterView = Backbone.View.extend({
+                    initialize: function() {
+                      _.bindAll(this);
+                      this.ele = this.options.ele;
+
+                      this.ele.x = this.model.get('x');
+                      this.ele.y = this.model.get('y');
+
+                      this.ele.gotoAndPlay('idleDown');
+
+                      this.model.on('idle', this.showCharacterIdleAnimation);
+                      this.model.on('change:x change:y', this.updateCharacterPositionAndAnimation);
+                    },
+
+                    updateCharacterPositionAndAnimation: function() {
+                      this.ele.x = this.model.get('x');
+                      this.ele.y = this.model.get('y');
+
+                      if (this.model.get('x') > this.model.previous('x')) {
+                        if (this.ele.currentAnimation !== 'walkRight') {
+                          this.ele.gotoAndPlay('walkRight');
+                        }
+                      } else if (this.model.get('x') < this.model.previous('x')) {
+                        if (this.ele.currentAnimation !== 'walkLeft') {
+                          this.ele.gotoAndPlay('walkLeft');
+                        }
+                      }
+
+                      if (this.model.get('y') > this.model.previous('y')) {
+                        if (this.ele.currentAnimation !== 'walkDown') {
+                          this.ele.gotoAndPlay('walkDown');
+                        }
+                      } else if (this.model.get('y') < this.model.previous('y')) {
+                        if (this.ele.currentAnimation !== 'walkUp') {
+                          this.ele.gotoAndPlay('walkUp');
+                        }
+                      }
+                    },
+
+                    showCharacterIdleAnimation: function() {
+                      this.ele.paused = true;
+                      this.ele.gotoAndPlay(this.ele.currentAnimation.replace('walk', 'idle'));
+                    }
+                  });
+
+                  var character = new Character({ x: 50, y: 50 });
+
+                  var characterView = new CharacterView({
+                    ele: bitmapAnimation,
+                    model: character
+                  });
+
+                  var stage = new Stage(canvas);
+                  stage.addChild(characterView.ele);
+                  Ticker.addListener(stage);
+                  Ticker.setFPS(24);
+
+                  $(window).keydown(function(event) {
+                    event.stopPropagation();
+
+                    if (event.which === 65) {
+                      character.move('left');
+                    } else if (event.which === 87) {
+                      character.move('up');
+                    } else if (event.which === 68) {
+                      character.move('right');
+                    } else if (event.which === 83) {
+                      character.move('down');
+                    }
+                  }).keyup(function(event) {
+                    character.idle();
+                  });
+                };
+              });
+            </script>
+          </section>
+        </section>
+
+        <section>
+        </section>
+      </div>
+
+      <aside class='controls'>
+        <a class='left' href='#'>&#x25c4;</a>
+        <a class='right' href='#'>&#x25ba;</a>
+        <a class='up' href='#'>&#x25b2;</a>
+        <a class='down' href='#'>&#x25bc;</a>
+      </aside>
+
+      <div class='progress'><span></span></div>
+    </div>
+
+    <script src='highlight.js'></script>
+    <script src='reveal.js'></script>
+    <script>
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // If true; each slide will be pushed to the browser history
+        history: true,
+
+        // Flags if mouse wheel navigation should be enabled
+        mouseWheel: true,
+
+        // Apply a 3D roll to links on hover
+        rollingLinks: false,
+
+        // UI style
+        theme: 'default', // default/neon
+
+        // Transition style
+        transition: 'default' // default/cube/page/concave/linear(2d)
+      });
+
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script src='easel.js'></script>
+    <!--<script src='//platform.twitter.com/widgets.js' charset='utf-8'></script>-->
+  </body>
+</html>

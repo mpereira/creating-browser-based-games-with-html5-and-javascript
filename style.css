@@ -1,0 +1,47 @@
+ul {
+  padding: 1em 0;
+}
+
+.vertical-align-middle {
+  /* Firefox */
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+
+  /* Safari and Chrome */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+
+  /* W3C */
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-align: center;
+}
+
+.talk-work {
+  background-image: url(talk_work.jpg);
+}
+
+.code-border-red {
+  border: 3px solid red;
+  padding: 1px 5px;
+}
+
+canvas {
+  background-color: white;
+}
+
+.unstyled-image {
+  margin: 10px 0 !important;
+  background: none !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+}
