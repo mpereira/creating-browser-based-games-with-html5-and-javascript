@@ -344,8 +344,7 @@
 
                     frames: {
                       width: 96,
-                      height: 96,
-                      count: 60
+                      height: 96
                     },
 
                     animations: {
@@ -471,8 +470,6 @@
                   Ticker.setFPS(24);
 
                   $(document).keydown(function(event) {
-                    event.stopPropagation();
-
                     if (event.which === 65) {
                       character.move('left');
                     } else if (event.which === 87) {
